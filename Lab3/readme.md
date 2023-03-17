@@ -1,4 +1,4 @@
-### Laboratorul 2
+### Laboratorul 4
 
 -----------------------
 
@@ -6,26 +6,32 @@
 
 ------------------------
 
-- [x] Create an object-oriented model of the problem. You should have at least the following classes Person, Company.
-- [x] Both classes should implement the interface java.util.Comparable. The natural order of the objects will be given by their names.
-- [x] Create the interface Node that defines the method used to obtain the name of a person or company. The classes above must implement this interface.
-- [x] Create a java.util.List containing node objects and print it on the screen.
+- [x] Create a Maven project.
+- [x] Create an object-oriented model of the problem. Students and projects have names. Make sure the objects of these classes are comparable.
+- [x] Create the students and the projects described in the example. Use streams in order to easily create the objects.
+- [x] Put all the students in a LinkedList and print them sorted by their names.
+- [x] Put all the projects in a TreeSet and print them sorted by their names.
 
 
 ## Homework (2p)
 
 ----------------------
 
-- [x] Create the complete model: Person, Programmer, Designer, Company. All persons have a birth date. Each class must have at least one specific property, that others don't have (be creative).
-- [x] Each person will contain a Map defining the relathionships to other persons or companies.
-- [x] Create the Network class containing a List of identifiable nodes.
-- [x] Create a method that computes the importance of a node in the network, as the number of its connections to other nodes.
-- [x] Create a network object containing persons, companies and relationships and print it on the screen. When printing the network, the nodes must be ordered according to their importance.
+- [ ] Create a class that describes the problem.
+- [ ] Using Java Stream API, write a query that display all the students that have a number of preferences lower than the average number of preferences.
+- [ ] Use a third-party library in order to generate random fake names for students and projects.
+- [ ] Create a Greedy algorithm in order to solve the problem.
+
 
 ## Bonus (2p)
 
 -------------------
 
-- [ ] Implement an efficient agorithm to determine if there are nodes in this networks which, if they are removed, disconnect the network.
-- [ ] Identify the blocks of the network, that is subgraphs that are maximally 2-connected.
-- [ ] Create JUnit tests for your algorithms.
+- [ ] Implement an algorithm that determines the maximum cardinality matching
+... or you may use the following libraries in order to solve it:
+  JGraphT
+  Graph4J
+- [ ] Create a random problem generator (with thousands of objects) and test the performance of the implementation (try both libraries).
+- [ ] Compare the results with the ones obtained by the greedy algorithm.
+- [ ] Determine a minimum cardinality set formed of students and projects with the property that each admissible pair (student-project) contains at least an element of this set.
+- [ ] Determine a maximum cardinality set of of students and projects such that there is no admissible pair (student-project) formed with elements of this set.
