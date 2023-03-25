@@ -1,0 +1,5 @@
+org\example\Document.class
+org\example\InvalidCatalogException.class
+org\example\Main.class
+org\example\Catalog.class
+org\example\CatalogUtil.class
