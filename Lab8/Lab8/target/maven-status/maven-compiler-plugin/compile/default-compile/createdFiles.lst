@@ -1,0 +1,5 @@
+org\example\AlbumDAO.class
+org\example\Main.class
+org\example\Database.class
+org\example\GenreDAO.class
+org\example\ArtistDAO.class
