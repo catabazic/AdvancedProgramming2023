@@ -22,6 +22,6 @@
 
 - [x] Create an object-oriented model of the data managed by the Java application.
 - [x] Implement all the DAO classes.
-- [ ] Use a connection pool in order to manage database connections, such as C3PO, HikariCP or Apache Commons DBCP.
-- [ ] Create a tool to import data from a real dataset, such as Rolling Stone's 500 Greatest Albums of All Time (or other)
+- [x] Use a connection pool in order to manage database connections, such as C3PO, HikariCP or Apache Commons DBCP.
+- [x] Create a tool to import data from a real dataset, such as Rolling Stone's 500 Greatest Albums of All Time (or other)
 
