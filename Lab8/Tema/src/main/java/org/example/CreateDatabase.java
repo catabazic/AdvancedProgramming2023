@@ -7,12 +7,17 @@ import java.sql.Statement;
 
 
 public class CreateDatabase {
+    /**
+     * Clasa in care cream tabelele cu care vom lucra acest laborator
+     * Ne conectam la baza de date din postgresql si folosim clase destinate pentru lucrul cu baza de date.
+     * Prin urmare, cream fiecare tabel in parte.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
         try {
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "parola");
-            stmt = conn.createStatement();
             String sql;
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "parola");
             stmt = conn.createStatement();
