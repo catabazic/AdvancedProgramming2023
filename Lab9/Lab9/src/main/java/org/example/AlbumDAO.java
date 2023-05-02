@@ -64,7 +64,7 @@ public class AlbumDAO {
             while (rs.next()) {
                 int id = rs.getInt(1);
                 int year = rs.getInt(2);
-                String artist = artistDAO.findById(rs.getInt(4)).NAME;
+                String artist = artistDAO.findById(rs.getInt(4)).name;
                 String title = rs.getString(3);
                 String sqlG = "Select * from album_genres where album_id=" + id;
                 Statement stmtG = con.createStatement();
@@ -114,7 +114,7 @@ public class AlbumDAO {
                 ArtistDAO art = new ArtistDAO();
                 art.create(artist);
             }
-            pstmt.setInt(3, artDAO.findByName(artist).ID);
+            pstmt.setInt(3, artDAO.findByName(artist).id);
             String query = pstmt.toString();
             System.out.println(query);
             pstmt.executeUpdate();
