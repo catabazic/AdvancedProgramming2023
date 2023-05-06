@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "albums")
@@ -12,14 +13,27 @@ import javax.persistence.*;
         })
 public class Album {
     //name=titlu
+    @Column(name = "release_year")
     int RELEASE_YEAR;
+    @Column(name = "artist")
     String ARTIST;
     String GENRES;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
     @Column(name = "id")
     int ID;
+    @Column(name = "title")
     String NAME;
+    @ManyToMany
+    @JoinTable(
+            name = "album_genres",
+            joinColumns = { @JoinColumn(name = "album_id") },
+            inverseJoinColumns = { @JoinColumn(name = "genres_id") }
+    )
+    private List<Genre> genres;
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
     public Album(){
     }
@@ -31,15 +45,15 @@ public class Album {
         this.GENRES = GENRES;
     }
 
-    public int getRELEASE_YEAR() {
+    public int getRelease_year() {
         return RELEASE_YEAR;
     }
 
-    public String getARTIST() {
+    public String getArtist() {
         return ARTIST;
     }
 
-    public String getGENRES() {
+    public String getGenres() {
         return GENRES;
     }
     public int getId() {
@@ -50,6 +64,13 @@ public class Album {
         return NAME;
     }
 
+    public int getIs() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     @Override
     public String toString() {

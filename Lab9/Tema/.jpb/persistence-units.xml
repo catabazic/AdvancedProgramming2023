@@ -2,10 +2,18 @@
 <project version="4">
   <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit name="persist" persistenceXmlPath="persistence">
-        <packages>
-          <package value="org" />
-        </packages>
+      <persistence-unit name="default" persistenceXmlPath="src/main/resources/persistence-units.xml">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>main.org.example.Album</class>
+        <class>main.org.example.Genre</class>
+        <class>main.org.example.Artist</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+          <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+          <property name="javax.persistence.jdbc.user" value="postgres"/>
+          <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+          <property name="javax.persistence.jdbc.password" value="parola"/>
+        </properties>
       </persistence-unit>
     </persistence-units>
   </component>

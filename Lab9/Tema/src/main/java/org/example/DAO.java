@@ -6,13 +6,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface DAO<T> {
-    public void create(String name);
+    void create(String name);
 
-    public List<T> getFindAllQuery();
+    List<T> getFindAllQuery();
 
-    public T findById(int id);
+    T findById(int id);
 
-    public T findByName(String name);
+    T findByName(String name);
 
-    public boolean existsName(String name);
+    boolean existsName(String name);
 }

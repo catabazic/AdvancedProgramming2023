@@ -7,6 +7,8 @@
     <data-source-infos>
       <data-source-info id="3b643e04-99b4-4208-a254-e5b9db048db8" persistence-unit-name="persistence" />
       <data-source-info id="3b643e04-99b4-4208-a254-e5b9db048db8" persistence-unit-name="persist" />
+      <data-source-info id="3b643e04-99b4-4208-a254-e5b9db048db8" persistence-unit-name="Persistence" />
+      <data-source-info id="3b643e04-99b4-4208-a254-e5b9db048db8" persistence-unit-name="pers" />
     </data-source-infos>
   </component>
 </project>

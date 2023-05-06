@@ -16,7 +16,7 @@ public class GenreDAO implements DAO<Genre> {
         try (Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "select * from genres where name='" + name + "'")) {
-            return rs.next() ? true : false;
+            return rs.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

@@ -22,7 +22,7 @@ public class AlbumDAO {
                 try (PreparedStatement pstmt = con.prepareStatement("SELECT genres_id1, genres_id2, genres_id3, genres_id4, genres_id5 FROM album_genres WHERE album_id = ?")) {
                     pstmt.setInt(1, rs.getInt(1));
                     ResultSet rsG = pstmt.executeQuery();
-                    String genres = new String();
+                    String genres = "";
                     GenreDAO genreDAO = new GenreDAO();
                     if (rsG.next()) {
                         for (int i = 1; i <= 5; i++) {
@@ -69,7 +69,7 @@ public class AlbumDAO {
                 String sqlG = "Select * from album_genres where album_id=" + id;
                 Statement stmtG = con.createStatement();
                 ResultSet rsG = stmtG.executeQuery(sqlG);
-                String genres = new String();
+                String genres = "";
                 if (rsG.next()) {
                     for (int i = 2; i <= 6; i++) {
                         int genreId = rsG.getInt(i);
@@ -150,7 +150,7 @@ public class AlbumDAO {
     @Override
     public String toString() {
         List<Album> albums = AlbumDAO.getFindAllQuery();
-        String toReturn = new String();
+        String toReturn = "";
         for (int i = 0; i < albums.size(); i++) {
             toReturn += albums.get(i) + "\n";
         }

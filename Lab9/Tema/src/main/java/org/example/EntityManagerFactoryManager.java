@@ -21,9 +21,9 @@ public class EntityManagerFactoryManager {
         return instance;
     }
 
-    public static EntityManagerFactory getEntityManagerFactory() {
+    public static EntityManagerFactory getEntityManagerFactory(String unitName) {
         if (entityManagerFactory == null) {
-            entityManagerFactory = Persistence.createEntityManagerFactory("PersistenceUnitName");
+            entityManagerFactory = Persistence.createEntityManagerFactory(unitName);
         }
         return entityManagerFactory;
     }

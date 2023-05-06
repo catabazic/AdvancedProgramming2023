@@ -1,0 +1,17 @@
+org\example\AlbumDAO.class
+org\example\DataRepository.class
+org\example\Artist.class
+org\example\Database.class
+org\example\GenreRepository.class
+org\example\CreateDatabase.class
+org\example\EntityManagerFactoryManager.class
+org\example\Album.class
+org\example\GenreDAO.class
+org\example\DAO.class
+org\example\AlbumRepository.class
+org\example\Main.class
+org\example\ArtistRepository.class
+org\example\Test.class
+org\example\NewData.class
+org\example\ArtistDAO.class
+org\example\Genre.class

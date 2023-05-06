@@ -1,22 +1,26 @@
 package org.example;
 
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "artists")
 @NamedQueries({
-        @NamedQuery(name = "Artist.findAll", query = "select e from Artist e order by e.name"),
-        @NamedQuery(name = "Genre.findById", query = "SELECT e FROM Artist e where g.id=?1"),
-        @NamedQuery(name = "Genre.findByName", query = "SELECT e FROM Artist e where g.name=?1")
+        @NamedQuery(name = "Artist.findAll", query = "SELECT a FROM Artist a ORDER BY a.name"),
+        @NamedQuery(name = "Artist.findById", query = "SELECT a FROM Artist a WHERE a.id = ?1"),
+        @NamedQuery(name = "Artist.findByName", query = "SELECT a FROM Artist a WHERE a.name LIKE :name")
 })
 public class Artist {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     int id;
+
     @Column(name = "name")
     String name;
+
+    @OneToMany(mappedBy = "artist")
+    private List<Album> albums;
 
     public Artist() {
     }
@@ -30,14 +34,6 @@ public class Artist {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -48,8 +44,6 @@ public class Artist {
 
     @Override
     public String toString() {
-        return "[ " + this.id + ", " + this.name + "]";
+        return "[ " + this.id + ", " + this.name + " ]";
     }
-
-
 }

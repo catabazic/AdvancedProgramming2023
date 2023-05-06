@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "genres")
@@ -25,6 +26,9 @@ public class Genre {
     @Column(name = "name")
     String NAME;
 
+    @ManyToMany(mappedBy = "genres")
+    private List<Album> albums;
+
     public int getId() {
         return ID;
     }
@@ -33,11 +37,11 @@ public class Genre {
         return NAME;
     }
 
-    public void setID(int ID) {
+    public void setId(int ID) {
         this.ID = ID;
     }
 
-    public void setNAME(String NAME) {
+    public void setName(String NAME) {
         this.NAME = NAME;
     }
 

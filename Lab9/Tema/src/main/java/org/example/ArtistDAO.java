@@ -16,11 +16,7 @@ public class ArtistDAO implements DAO<Artist> {
         try (Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "select * from artists where name='" + name + "'")) {
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
+            return rs.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
