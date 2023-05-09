@@ -1,16 +1,15 @@
 package org.example;
 
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class EntityManagerFactoryManager {
-    private static EntityManagerFactory entityManagerFactory = null;
+public class EntityManagerFactory {
+    private static javax.persistence.EntityManagerFactory entityManagerFactory = null;
 
-    private EntityManagerFactoryManager() {
+    private EntityManagerFactory() {
     }
 
 
-    public static EntityManagerFactory getEntityManagerFactory(String unitName) {
+    public static javax.persistence.EntityManagerFactory getEntityManagerFactory(String unitName) {
         if (entityManagerFactory == null) {
             entityManagerFactory = Persistence.createEntityManagerFactory(unitName);
         }

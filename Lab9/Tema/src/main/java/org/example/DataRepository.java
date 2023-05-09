@@ -1,18 +1,17 @@
 package org.example;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.io.Serializable;
 import java.util.List;
 
 public abstract class DataRepository  <T> implements Serializable {
     private final Class<T> entityClass;
     private final EntityManager entityManager;
-    private final EntityManagerFactory entityManagerFactory;
+    private final javax.persistence.EntityManagerFactory entityManagerFactory;
 
     public DataRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
-        entityManagerFactory = EntityManagerFactoryManager.getEntityManagerFactory("Persistence");
+        entityManagerFactory = EntityManagerFactory.getEntityManagerFactory("Persistence");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
