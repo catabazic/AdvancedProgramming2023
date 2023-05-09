@@ -2,6 +2,8 @@ package org.example;
 
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.PersistenceUnit;
+
 
 @Entity
 @Table(name = "albums")
