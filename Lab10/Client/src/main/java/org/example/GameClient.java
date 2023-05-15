@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameClient {
     private final String serverAddress;
@@ -23,34 +25,48 @@ public class GameClient {
     public void connect() throws IOException {
         socket = new Socket(serverAddress, PORT);
 
-        PrintWriter output = new PrintWriter(socket.getOutputStream());
+        PrintWriter out = new PrintWriter(socket.getOutputStream());
         input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        String request = null;
-        BufferedReader consoleInput = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        Scanner request = new Scanner(System.in);
 
         welcomeMessage();
+        String command = new String();
         do {
             System.out.print("Input command: ");
-            request = consoleInput.readLine();
-            // System.out.println("Read the request: '" + request + "'");
+            command = request.nextLine();
+            System.out.println("Read the request: '" + command + "'");
 
             // Send the request to the server
-            output.println(request);
-            output.flush();
+            out.println(command);
+            out.flush();
 
             // Wait for the response
             getResponse();
-        } while (!request.equals("exit"));
+        } while (!command.equals("exit"));
+        socket.close();
     }
 
     private void welcomeMessage() {
         System.out.println("---------------------------------------------------------------");
         System.out.println("\n----------------------------Gomoku!----------------------------\n");
         System.out.println("---------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("Accepted commands: ");
+        System.out.println("-join game");
+        System.out.println("-start");
+        System.out.println("-try move [row] [column]");
+        System.out.println("-submit move");
+        System.out.println("-exit");
+        System.out.println("---------------------------------------------------------------\n\n");
     }
 
     private void getResponse() throws IOException {
-        String response = input.readLine();
-        System.out.println("Server response: '" + response + "'!");
+        String inputLine;
+        while (!(inputLine = input.readLine()).equals("done")) {
+            System.out.println("Server response: '" + inputLine);
+        }
+       // String response = input.readLine();
     }
 }
