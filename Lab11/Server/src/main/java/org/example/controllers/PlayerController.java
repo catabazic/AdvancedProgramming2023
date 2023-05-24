@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.example.Request.UpdateName;
 import org.example.entities.Player;
 import org.example.repositories.PlayerRepository;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping({"/player"})
 public class PlayerController {
     PlayerRepository personRepository;
@@ -16,7 +18,7 @@ public class PlayerController {
 
     @GetMapping(path = "/all")
     public List<Player> getAll() {
-        return personRepository.findAll();
+        return playerService.getAll();
     }
 
     @PostMapping(path  ="/add")
@@ -29,7 +31,7 @@ public class PlayerController {
         playerService.deletePlayer(personRepository.findById(id));
     }
 
-    @PutMapping(path = "update")
+    @PutMapping(path = "/update")
     public void updateName(@RequestBody UpdateName update){
         playerService.updateName(personRepository.findById(update.getId()),update.getName());
     }

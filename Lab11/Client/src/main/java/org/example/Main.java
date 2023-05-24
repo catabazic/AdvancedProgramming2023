@@ -14,16 +14,7 @@ public class Main {
     }
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
-    public void invokeService() {
-        String serviceUrl = "http://localhost:8090";
-
-        RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(serviceUrl, String.class);
-
-        System.out.println("Response from the service: " + response);
+    public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.build();
     }
 }

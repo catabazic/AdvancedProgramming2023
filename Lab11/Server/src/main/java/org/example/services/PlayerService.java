@@ -1,12 +1,22 @@
 package org.example.services;
 
+import lombok.RequiredArgsConstructor;
 import org.example.entities.Player;
 import org.example.repositories.PlayerRepository;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
+
+@Service
+@RequiredArgsConstructor
 public class PlayerService {
     PlayerRepository playerRepository;
+
+    public List<Player> getAll() {
+        return playerRepository.findAll();
+    }
 
     public void addPlayer(String name){
         if(name==null){

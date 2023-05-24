@@ -21,23 +21,16 @@ public class CreateDatabase {
             String sql;
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "parola");
             stmt = conn.createStatement();
-            sql = "DROP TABLE IF EXISTS players;" +
-                    "DROP TABLE IF EXISTS games;";
+            sql =
+                    "DROP TABLE IF EXISTS games;" +
+                     "DROP TABLE IF EXISTS players;";
             stmt.executeUpdate(sql);
             sql = "CREATE TABLE players (" +
                     "    id SERIAL PRIMARY KEY," +
-                    "    game_id int," +
+                    "    name varchar(90)," +
                     "    color int" +
                     ");";
             stmt.executeUpdate(sql);
-            sql = "CREATE TABLE timer (" +
-                    "    id SERIAL PRIMARY KEY," +
-                    "    time_left int," +
-                    "    player_id int," +
-                    "    FOREIGN KEY (player_id) REFERENCES players(id)" +
-                    ");";
-            stmt.executeUpdate(sql);
-
             sql = "CREATE TABLE games (" +
                     "    id SERIAL PRIMARY KEY," +
                     "    player_id1 int," +
@@ -50,6 +43,15 @@ public class CreateDatabase {
                     "    FOREIGN KEY (winner) REFERENCES players(id)" +
                     ");";
             stmt.executeUpdate(sql);
+            sql="INSERT INTO players (name) VALUES\n" +
+                    "    ('Edd'), ('Monica'), ('Rostislav'), ('Diana');";
+            stmt.executeUpdate(sql);
+            /*sql="INSERT INTO games (player_id1, player_id2, board, turn, winner) VALUES"+
+                    "(1, 2, 'XOX-OX-X-', 6, 1),"+
+                    "(3, 4, 'XOXOXO---', 8, 3),"+
+            "(2, 1, 'OXX-OX---', 7, 2),"+
+            "(4, 3, 'XOXOXOXOX', 9, 4)";
+            stmt.executeUpdate(sql);*/
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
