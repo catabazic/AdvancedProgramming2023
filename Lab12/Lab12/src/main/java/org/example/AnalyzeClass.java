@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -19,14 +20,12 @@ public class AnalyzeClass {
         File file = new File(path);
 
         if (file.isDirectory()) {
-            // Input is a folder, explore it recursively
             exploreFolder(file);
         } else if (file.isFile() && file.getName().endsWith(".jar")) {
-            // Input is a .jar file
             analyzeJar(file);
         } else if (file.isFile() && file.getName().endsWith(".class")) {
             analyzeClassFile(file);
-        }else {
+        } else {
             throw new IllegalArgumentException("Invalid input: " + path);
         }
     }
@@ -49,9 +48,6 @@ public class AnalyzeClass {
             URL jarURL = jarFile.toURI().toURL();
             URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{jarURL});
 
-            // Iterate over the entries in the jar file
-            // and analyze only the .class files
-            // assuming that the classes are in the root directory of the jar
             JarFile jar = new JarFile(jarFile);
             Enumeration<JarEntry> entries = jar.entries();
             while (entries.hasMoreElements()) {
@@ -69,12 +65,24 @@ public class AnalyzeClass {
         }
     }
 
-    private static void analyzeClassFile(File classFile) {
-            analyzeClassName(classFile.getAbsolutePath());
+    private static boolean isTestClass(Class<?> clazz) {
+        if (!Modifier.isPublic(clazz.getModifiers()) || Modifier.isAbstract(clazz.getModifiers())) {
+            return false;
+        }
+        for (Method method : clazz.getMethods()) {
+            if (method.isAnnotationPresent(Test.class)) {
+                return true;
+            }
+        }
+        return false;
     }
+
+    private static void analyzeClassFile(File classFile) {
+        analyzeClassName(classFile.getAbsolutePath());
+    }
+
     public static void analyzeClassName(String urlClass) {
         try {
-            // Load the specified class in memory
             File file = new File(urlClass);
             MyClassLoader myClassLoader = new MyClassLoader();
             if (file.exists()) {
@@ -82,8 +90,7 @@ public class AnalyzeClass {
                 myClassLoader.addURL(url);
             }
             String className = getClassName(urlClass);
-
-            Class myClass = myClassLoader.loadClass(urlClass);
+            Class myClass = Class.forName(className);
 
             System.out.println(myClass.getName());
             System.out.println(myClass.getPackage());
@@ -111,7 +118,6 @@ public class AnalyzeClass {
     private static String getClassName(String classFilePath) {
         String separator = File.separator;
         if (separator.equals("\\")) {
-            // Windows separator is backslash, replace forward slashes with backslashes
             classFilePath = classFilePath.replace('/', '\\');
         }
 
