@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -65,18 +64,6 @@ public class AnalyzeClass {
         }
     }
 
-    private static boolean isTestClass(Class<?> clazz) {
-        if (!Modifier.isPublic(clazz.getModifiers()) || Modifier.isAbstract(clazz.getModifiers())) {
-            return false;
-        }
-        for (Method method : clazz.getMethods()) {
-            if (method.isAnnotationPresent(Test.class)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static void analyzeClassFile(File classFile) {
         analyzeClassName(classFile.getAbsolutePath());
     }
@@ -117,9 +104,6 @@ public class AnalyzeClass {
 
     private static String getClassName(String classFilePath) {
         String separator = File.separator;
-        if (separator.equals("\\")) {
-            classFilePath = classFilePath.replace('/', '\\');
-        }
 
         int packageStartIndex = classFilePath.indexOf("classes" + separator) + 8;
         int packageEndIndex = classFilePath.lastIndexOf(separator);
